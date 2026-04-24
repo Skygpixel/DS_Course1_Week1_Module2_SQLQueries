@@ -25,7 +25,7 @@
 # 
 # Table Name: planets
 
-# In[1]:
+# In[69]:
 
 
 # CodeGrade step0
@@ -46,18 +46,18 @@ pd.read_sql("""SELECT * FROM planets; """, conn1)
 # ### Step 1
 # Return all the columns for planets that have 0 moons.
 
-# In[ ]:
+# In[70]:
 
 
 # CodeGrade step1
 # Replace None with your code
-df_no_moons = pd.read_sql("""SELECT name FROM planets WHERE num_of_moons = 0""", conn1)
+df_no_moons = pd.read_sql("""SELECT * FROM planets WHERE num_of_moons = 0""", conn1)
 
 
 # ### Step 2
 # Return the name and mass of each planet that has a name with exactly 7 letters. Avoid hard coding this filter subset as much as possible.
 
-# In[ ]:
+# In[71]:
 
 
 # CodeGrade step2
@@ -75,7 +75,7 @@ WHERE LENGTH(name) = 7;
 # 
 # Return the name and mass for each planet that has a mass that is less than or equal to 1.00.
 
-# In[ ]:
+# In[72]:
 
 
 # CodeGrade step3
@@ -89,7 +89,7 @@ df_mass = pd.read_sql(
 # 
 # Return all the columns for planets that have at least one moon and a mass less than 1.00.
 
-# In[ ]:
+# In[73]:
 
 
 # CodeGrade step4
@@ -102,12 +102,12 @@ df_mass_moon = pd.read_sql(
 # 
 # Return the name and color of planets that have a color containing the string "blue".
 
-# In[ ]:
+# In[74]:
 
 
 # CodeGrade step5
 # Replace None with your code
-df_blue = pd.read_sql("""SELECT name FROM planets WHERE color = 'blue'""", conn1)
+df_blue = pd.read_sql("""SELECT name, color FROM planets WHERE color LIKE '%blue%'""", conn1)
 
 
 # ## Part 3: Ordering and Limiting
@@ -116,7 +116,7 @@ df_blue = pd.read_sql("""SELECT name FROM planets WHERE color = 'blue'""", conn1
 # 
 # Table Name: dogs
 
-# In[10]:
+# In[75]:
 
 
 # CodeGrade step0
@@ -134,18 +134,18 @@ pd.read_sql("SELECT * FROM dogs;", conn2)
 # ### Step 6
 # Return the name, age, and breed of all dogs that are hungry (binary flag of 1) and sort them from youngest to oldest.
 
-# In[ ]:
+# In[76]:
 
 
 # CodeGrade step6
 # Replace None with your code
-df_hungry = pd.read_sql("""SELECT name, age, breed FROM dogs WHERE hungry = 1""", conn2)
+df_hungry = pd.read_sql("""SELECT name, age, breed FROM dogs WHERE hungry = 1 ORDER BY age""", conn2)
 
 
 # ### Step 7
 # Return the name, age, and hungry columns for hungry dogs between the ages of two and seven. This query should also sort these dogs in alphabetical order.
 
-# In[ ]:
+# In[77]:
 
 
 # CodeGrade step7
@@ -163,7 +163,7 @@ ORDER BY name ASC;
 # 
 # Return the name, age, and breed for the 4 oldest dogs. Sort the result alphabetically based on the breed.
 
-# In[ ]:
+# In[78]:
 
 
 # CodeGrade step8
@@ -186,7 +186,7 @@ ORDER BY breed ASC;
 # 
 # Table Name: babe_ruth_stats
 
-# In[15]:
+# In[79]:
 
 
 # CodeGrade step0
@@ -206,7 +206,7 @@ SELECT * FROM babe_ruth_stats; """, conn3)
 # 
 # Return the total number of years that Babe Ruth played professional baseball
 
-# In[ ]:
+# In[82]:
 
 
 # CodeGrade step9
@@ -224,9 +224,15 @@ FROM babe_ruth_stats;
 # In[ ]:
 
 
+
+
+
+# In[85]:
+
+
 # CodeGrade step10
 # Replace None with your code
-df_hr_total = pd.read_sql("""SELECT SUM(runs) FROM babe_ruth_stats""", conn3)
+df_hr_total = pd.read_sql("""SELECT SUM(hr) FROM babe_ruth_stats""", conn3)
 
 
 # ## Part 5: Grouping and Aggregation
@@ -235,12 +241,12 @@ df_hr_total = pd.read_sql("""SELECT SUM(runs) FROM babe_ruth_stats""", conn3)
 # 
 # For each team that Babe Ruth has played on, return the team name and the number of years he played on that team, aliased as 'number_years'.
 
-# In[ ]:
+# In[88]:
 
 
 # CodeGrade step11
 # Replace None with your code
-df_team_years = pd.read_sql("""
+df_teams_years = pd.read_sql("""
 SELECT team, COUNT(DISTINCT year) AS number_years
 FROM babe_ruth_stats
 GROUP BY team;
