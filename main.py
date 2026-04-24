@@ -134,7 +134,7 @@ pd.read_sql("SELECT * FROM dogs;", conn2)
 # ### Step 6
 # Return the name, age, and breed of all dogs that are hungry (binary flag of 1) and sort them from youngest to oldest.
 
-# In[76]:
+# In[94]:
 
 
 # CodeGrade step6
@@ -145,7 +145,7 @@ df_hungry = pd.read_sql("""SELECT name, age, breed FROM dogs WHERE hungry = 1 OR
 # ### Step 7
 # Return the name, age, and hungry columns for hungry dogs between the ages of two and seven. This query should also sort these dogs in alphabetical order.
 
-# In[77]:
+# In[91]:
 
 
 # CodeGrade step7
@@ -163,21 +163,22 @@ ORDER BY name ASC;
 # 
 # Return the name, age, and breed for the 4 oldest dogs. Sort the result alphabetically based on the breed.
 
-# In[78]:
+# In[ ]:
 
 
 # CodeGrade step8
 # Replace None with your code
 df_4_oldest = pd.read_sql("""
 SELECT name, age, breed
-FROM (
-    SELECT name, age, breed
-    FROM dogs
-    ORDER BY age DESC
-    LIMIT 4
-)
-ORDER BY breed ASC;
+FROM dogs
+ORDER BY age DESC, breed ASC LIMIT 4;
 """, conn2)
+
+
+# In[ ]:
+
+
+
 
 
 # ## Part 4: Aggregation
